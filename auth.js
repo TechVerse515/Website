@@ -1,9 +1,5 @@
 /* ============================================================
-   js/auth.js — Firebase Google Sign-In for Login Modal
-   ============================================================
-   ⚠️  IMPORTANT: Replace the firebaseConfig object below with
-       your own Firebase project credentials from:
-       https://console.firebase.google.com → Project Settings → Web App
+   js/auth.js — Firebase Google Sign-In + Firestore User Setup
    ============================================================ */
 
 const firebaseConfig = {
@@ -16,19 +12,53 @@ const firebaseConfig = {
     measurementId: "G-T5M3V5EFCR"
 };
 
-// Initialise Firebase (guard against double-init if included elsewhere)
+// Initialise Firebase (guard against double-init)
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
 const auth = firebase.auth();
+const db   = firebase.firestore();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+/* ---- Save / update user document in Firestore ---- */
+async function saveUserToFirestore(user) {
+    const userRef = db.collection('users').doc(user.uid);
+    const doc = await userRef.get();
+
+    if (!doc.exists) {
+        // New user → create document with all fields
+        await userRef.set({
+            displayName : user.displayName || '',
+            email       : user.email       || '',
+            photoURL    : user.photoURL    || '',
+            createdAt   : firebase.firestore.FieldValue.serverTimestamp(),
+            skills      : {
+                dsa       : 0,
+                htmlcss   : 0,
+                javascript: 0,
+                react     : 0,
+                nodejs    : 0,
+                python    : 0
+            }
+        });
+        console.log('New user document created in Firestore:', user.uid);
+    } else {
+        // Returning user → keep existing skills but refresh profile info
+        await userRef.update({
+            displayName : user.displayName || doc.data().displayName,
+            email       : user.email       || doc.data().email,
+            photoURL    : user.photoURL    || doc.data().photoURL
+        });
+        console.log('Existing user document updated in Firestore:', user.uid);
+    }
+}
 
 /* ---- Sign In ---- */
 function signInWithGoogle() {
     auth.signInWithPopup(googleProvider)
         .then((result) => {
-            // Auth state listener below will update the UI
+            // Firestore write happens in onAuthStateChanged
         })
         .catch((error) => {
             console.error('Sign-in error:', error.message);
@@ -43,24 +73,27 @@ function signOutUser() {
     });
 }
 
-/* ---- Auth State Listener — updates modal UI ---- */
+/* ---- Auth State Listener — updates modal UI + writes to Firestore ---- */
 auth.onAuthStateChanged((user) => {
-    const signInBtn = document.getElementById('googleSignInBtn');
+    const signInBtn   = document.getElementById('googleSignInBtn');
     const signedInDiv = document.getElementById('signedInState');
-    const userAvatar = document.getElementById('userAvatar');
-    const userNameEl = document.getElementById('userName');
+    const userAvatar  = document.getElementById('userAvatar');
+    const userNameEl  = document.getElementById('userName');
     const userEmailEl = document.getElementById('userEmail');
 
     if (user) {
-        // Signed in → show user card, hide sign-in button
-        if (signInBtn) signInBtn.style.display = 'none';
+        // Write / update Firestore user document
+        saveUserToFirestore(user);
+
+        // Update modal UI
+        if (signInBtn)   signInBtn.style.display  = 'none';
         if (signedInDiv) signedInDiv.style.display = 'block';
-        if (userAvatar) userAvatar.src = user.photoURL || '';
-        if (userNameEl) userNameEl.textContent = user.displayName || 'Tech Verse Member';
-        if (userEmailEl) userEmailEl.textContent = user.email || '';
+        if (userAvatar)  userAvatar.src            = user.photoURL || '';
+        if (userNameEl)  userNameEl.textContent    = user.displayName || 'Tech Verse Member';
+        if (userEmailEl) userEmailEl.textContent   = user.email || '';
     } else {
-        // Signed out → show sign-in button, hide user card
-        if (signInBtn) signInBtn.style.display = 'flex';
+        // Signed out
+        if (signInBtn)   signInBtn.style.display  = 'flex';
         if (signedInDiv) signedInDiv.style.display = 'none';
     }
 });
@@ -68,7 +101,7 @@ auth.onAuthStateChanged((user) => {
 /* ---- Close modal on backdrop click ---- */
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('loginModal');
-    const card = document.getElementById('loginCard');
+    const card  = document.getElementById('loginCard');
     if (modal && card) {
         modal.addEventListener('click', (e) => {
             if (!card.contains(e.target)) {
