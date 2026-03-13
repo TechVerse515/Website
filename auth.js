@@ -209,20 +209,22 @@ let firstStateChange = true;
 auth.onAuthStateChanged((user) => {
     const signInBtn   = document.getElementById('googleSignInBtn');
     const signedInDiv = document.getElementById('signedInState');
+    const userAvatar  = document.getElementById('userAvatar');
+    const userNameEl  = document.getElementById('userName');
+    const userEmailEl = document.getElementById('userEmail');
 
     if (user) {
-        // Hide sign-in button, hide extra signed-in card (we use toast instead)
+        // --- Update modal: hide sign-in button, show user card ---
         if (signInBtn)   signInBtn.style.display   = 'none';
-        if (signedInDiv) signedInDiv.style.display  = 'none';
+        if (signedInDiv) signedInDiv.style.display  = 'block';
+        if (userAvatar)  userAvatar.src             = user.photoURL || '';
+        if (userNameEl)  userNameEl.textContent     = user.displayName || 'Tech Verse Member';
+        if (userEmailEl) userEmailEl.textContent    = user.email || '';
 
-        // Close modal smoothly
+        // --- Show success toast only when modal was just used to log in ---
         const modal = document.getElementById('loginModal');
-        if (modal && modal.style.display === 'flex') {
-            setTimeout(() => { modal.style.display = 'none'; }, 800);
-        }
-
-        // Show success toast (skip on very first silent load if already signed in)
-        if (!firstStateChange || (modal && modal.style.display === 'flex')) {
+        const modalOpen = modal && modal.style.display === 'flex';
+        if (!firstStateChange || modalOpen) {
             const first = user.displayName ? user.displayName.split(' ')[0] : 'Builder';
             showToast(
                 'success',
@@ -231,8 +233,12 @@ auth.onAuthStateChanged((user) => {
             );
         }
     } else {
+        // --- Signed out: show the Google button again, hide user card ---
         if (signInBtn)   signInBtn.style.display   = 'flex';
         if (signedInDiv) signedInDiv.style.display  = 'none';
+        if (userAvatar)  userAvatar.src             = '';
+        if (userNameEl)  userNameEl.textContent     = '';
+        if (userEmailEl) userEmailEl.textContent    = '';
     }
 
     firstStateChange = false;
