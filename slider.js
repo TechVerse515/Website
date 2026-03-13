@@ -12,12 +12,12 @@
 
     const slides = Array.from(stage.querySelectorAll('.slide'));
     const N = slides.length;                   // 8
-    const CARD_W = 220;
+    const CARD_W = 200;
     const STEP = 360 / N;                         // degrees between slides
     const AUTO_MS = 3000;
 
     /* ── Radius of the 3D ring ── */
-    const radius = Math.round((CARD_W * 0.72) / (2 * Math.tan(Math.PI / N)));
+    const radius = Math.round((CARD_W * 1.5) / (2 * Math.tan(Math.PI / N)));
 
     /* ── Place every slide on the ring (they never move individually) ── */
     slides.forEach((slide, i) => {
@@ -48,9 +48,16 @@
         dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
     }
 
-    /* ── Rotate one step clockwise ── */
+    /* ── Rotate one step clockwise (Next) ── */
     function stepForward() {
         cumulativeAngle -= STEP;
+        stage.style.transform = `rotateY(${cumulativeAngle}deg)`;
+        updateActive();
+    }
+
+    /* ── Rotate one step anticlockwise (Prev) ── */
+    function stepBack() {
+        cumulativeAngle += STEP;
         stage.style.transform = `rotateY(${cumulativeAngle}deg)`;
         updateActive();
     }
@@ -76,32 +83,23 @@
         s.addEventListener('click', () => { stopAuto(); jumpTo(i); startAuto(); });
     });
 
-    /* ── Buttons: BOTH go clockwise ──
-       Next = one step forward.
-       Prev = N−1 steps forward (same as going back one, but clockwise). */
+    /* ── Buttons: Next = clockwise, Prev = anticlockwise ── */
     if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); stepForward(); startAuto(); });
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-        stopAuto();
-        /* clockwise "back" = advance N-1 steps */
-        cumulativeAngle -= STEP * (N - 1);
-        stage.style.transform = `rotateY(${cumulativeAngle}deg)`;
-        updateActive();
-        startAuto();
-    });
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); stepBack(); startAuto(); });
 
-    /* ── Keyboard ── */
+    /* ── Keyboard: ArrowRight = next (clockwise), ArrowLeft = prev (anticlockwise) ── */
     document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-            stopAuto(); stepForward(); startAuto();
-        }
+        if (e.key === 'ArrowRight') { stopAuto(); stepForward(); startAuto(); }
+        if (e.key === 'ArrowLeft')  { stopAuto(); stepBack();    startAuto(); }
     });
 
-    /* ── Touch / swipe (always clockwise) ── */
+    /* ── Touch / swipe: swipe left = next, swipe right = prev ── */
     let tx = 0;
     stage.addEventListener('touchstart', e => { tx = e.touches[0].clientX; stopAuto(); }, { passive: true });
     stage.addEventListener('touchend', e => {
-        /* swipe left OR right → clockwise step */
-        if (Math.abs(tx - e.changedTouches[0].clientX) > 40) stepForward();
+        const diff = tx - e.changedTouches[0].clientX;
+        if (diff > 40)  { stepForward(); }   // swipe left  → next
+        if (diff < -40) { stepBack(); }       // swipe right → prev
         startAuto();
     }, { passive: true });
 
