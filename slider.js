@@ -17,7 +17,7 @@
     const AUTO_MS = 3000;
 
     /* ── Radius of the 3D ring ── */
-    const radius = Math.round((CARD_W * 1.35) / (2 * Math.tan(Math.PI / N)));
+    const radius = Math.round((CARD_W * 0.72) / (2 * Math.tan(Math.PI / N)));
 
     /* ── Place every slide on the ring (they never move individually) ── */
     slides.forEach((slide, i) => {
