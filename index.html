@@ -464,18 +464,6 @@
                 Continue with Google
             </button>
 
-            <!-- Signed-in state (hidden initially) -->
-            <div id="signedInState" style="display:none;margin-top:20px;">
-                <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;margin-bottom:16px;">
-                    <img id="userAvatar" src="" alt="avatar" style="width:40px;height:40px;border-radius:50%;object-fit:cover;"/>
-                    <div style="text-align:left;">
-                        <p id="userName" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#fff;margin:0;"></p>
-                        <p id="userEmail" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.45);margin:0;"></p>
-                    </div>
-                </div>
-                <button onclick="signOutUser()" style="width:100%;padding:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#aaa;font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">Sign Out</button>
-            </div>
-
             <p style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.25);margin-top:24px;">By continuing, you agree to our Terms &amp; Privacy Policy.</p>
         </div>
     </div>
@@ -492,6 +480,5 @@
     <script src="auth.js"></script>
 
 </body>
-
 
 </html>
