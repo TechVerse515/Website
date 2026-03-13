@@ -22,16 +22,31 @@ const db   = firebase.firestore();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 /* ============================================================
+   showToast — small notification banner for debug / status
+   ============================================================ */
+function showToast(msg, isError = false) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    Object.assign(t.style, {
+        position: 'fixed', bottom: '24px', left: '50%',
+        transform: 'translateX(-50%)',
+        background: isError ? '#c0392b' : '#27ae60',
+        color: '#fff', padding: '12px 24px', borderRadius: '10px',
+        fontFamily: 'Inter, sans-serif', fontSize: '13px',
+        zIndex: '99999', boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+        maxWidth: '90vw', textAlign: 'center', pointerEvents: 'none',
+        transition: 'opacity 0.4s'
+    });
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 4000);
+}
+
+/* ============================================================
    saveUserToFirestore
-   Writes / merges a document in the "users" collection.
-   Document ID = the user's Firebase UID (unique, stable).
-   - On first login  → creates the document
-   - On repeat login → updates lastLoginAt only
    ============================================================ */
 async function saveUserToFirestore(user) {
     const now = new Date();
 
-    // Human-readable timestamp strings  (IST offset kept by browser locale)
     const loginDate = now.toLocaleDateString('en-IN', {
         day: '2-digit', month: 'short', year: 'numeric'
     });
@@ -42,24 +57,33 @@ async function saveUserToFirestore(user) {
     const userRef = db.collection('users').doc(user.uid);
 
     try {
-        // merge:true → creates the doc if new, updates specific fields if existing
-        await userRef.set(
-            {
-                uid:          user.uid,
-                name:         user.displayName || 'Unknown',
-                email:        user.email || '',
-                photoURL:     user.photoURL  || '',
-                // Tracks the very first sign-up (never overwritten on repeat logins)
-                createdAt:    firebase.firestore.FieldValue.serverTimestamp(),
-                // Always updated to the latest login
-                lastLoginAt:  firebase.firestore.FieldValue.serverTimestamp(),
+        const snap = await userRef.get();
+
+        if (!snap.exists) {
+            // First-ever login — create full document
+            await userRef.set({
+                uid:           user.uid,
+                name:          user.displayName || 'Unknown',
+                email:         user.email || '',
+                photoURL:      user.photoURL || '',
+                createdAt:     firebase.firestore.FieldValue.serverTimestamp(),
+                lastLoginAt:   firebase.firestore.FieldValue.serverTimestamp(),
                 lastLoginDate: loginDate,
                 lastLoginTime: loginTime,
-            },
-            { merge: true }
-        );
+            });
+        } else {
+            // Repeat login — update only login fields, preserve createdAt
+            await userRef.update({
+                name:          user.displayName || snap.data().name,
+                email:         user.email || snap.data().email,
+                photoURL:      user.photoURL || snap.data().photoURL,
+                lastLoginAt:   firebase.firestore.FieldValue.serverTimestamp(),
+                lastLoginDate: loginDate,
+                lastLoginTime: loginTime,
+            });
+        }
 
-        // Also push a record to a subcollection so every login is preserved
+        // Push individual login record to loginHistory subcollection
         await userRef.collection('loginHistory').add({
             loginAt:   firebase.firestore.FieldValue.serverTimestamp(),
             loginDate: loginDate,
@@ -67,20 +91,27 @@ async function saveUserToFirestore(user) {
         });
 
         console.log('✅ User data saved to Firestore');
+        showToast('✅ Logged in & data saved!');
+
     } catch (err) {
-        console.error('❌ Firestore write error:', err);
+        const msg = err.code === 'permission-denied'
+            ? '❌ Firestore rules are blocking writes. Update your Firestore Rules to allow authenticated users.'
+            : `❌ Firestore error: ${err.message}`;
+        console.error('Firestore write error:', err.code, err.message);
+        showToast(msg, true);
     }
 }
 
 /* ---- Sign In ---- */
 function signInWithGoogle() {
     auth.signInWithPopup(googleProvider)
-        .then((result) => {
-            // saveUserToFirestore is called inside onAuthStateChanged below
-        })
+        .then(() => { /* onAuthStateChanged handles the rest */ })
         .catch((error) => {
-            console.error('Sign-in error:', error.message);
-            alert('Sign-in failed: ' + error.message);
+            const msg = error.code === 'auth/unauthorized-domain'
+                ? '❌ Domain not authorised in Firebase. Open Firebase → Authentication → Authorised Domains and add "localhost" or your domain.'
+                : `❌ Sign-in failed: ${error.message}`;
+            console.error('Sign-in error:', error.code, error.message);
+            showToast(msg, true);
         });
 }
 
@@ -100,19 +131,16 @@ auth.onAuthStateChanged((user) => {
     const userEmailEl = document.getElementById('userEmail');
 
     if (user) {
-        // Save / update user record in Firestore
         saveUserToFirestore(user);
 
-        // Update modal UI
-        if (signInBtn)   signInBtn.style.display   = 'none';
-        if (signedInDiv) signedInDiv.style.display  = 'block';
-        if (userAvatar)  userAvatar.src             = user.photoURL || '';
-        if (userNameEl)  userNameEl.textContent     = user.displayName || 'Tech Verse Member';
-        if (userEmailEl) userEmailEl.textContent    = user.email || '';
+        if (signInBtn)   signInBtn.style.display  = 'none';
+        if (signedInDiv) signedInDiv.style.display = 'block';
+        if (userAvatar)  userAvatar.src            = user.photoURL || '';
+        if (userNameEl)  userNameEl.textContent    = user.displayName || 'Tech Verse Member';
+        if (userEmailEl) userEmailEl.textContent   = user.email || '';
     } else {
-        // Signed out — restore sign-in button
-        if (signInBtn)   signInBtn.style.display   = 'flex';
-        if (signedInDiv) signedInDiv.style.display  = 'none';
+        if (signInBtn)   signInBtn.style.display  = 'flex';
+        if (signedInDiv) signedInDiv.style.display = 'none';
     }
 });
 
@@ -122,9 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const card  = document.getElementById('loginCard');
     if (modal && card) {
         modal.addEventListener('click', (e) => {
-            if (!card.contains(e.target)) {
-                modal.style.display = 'none';
-            }
+            if (!card.contains(e.target)) modal.style.display = 'none';
         });
     }
 });
