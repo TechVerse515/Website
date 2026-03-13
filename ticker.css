@@ -1,0 +1,78 @@
+/* ============================================================
+   TICKER.CSS — Infinite Company Logos Scrolling Ticker
+   ============================================================ */
+
+.ticker-section {
+    padding: 40px 0 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+.ticker-label {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+.ticker-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fade edges left & right */
+.ticker-wrapper::before,
+.ticker-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 140px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ticker-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--black), transparent);
+}
+
+.ticker-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--black), transparent);
+}
+
+/* Scrolling track */
+.ticker-track {
+    display: flex;
+    align-items: center;
+    animation: ticker 28s linear infinite;
+    width: max-content;
+}
+
+.ticker-item {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+    padding: 0 40px;
+    letter-spacing: -0.01em;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.2s;
+}
+
+.ticker-item:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

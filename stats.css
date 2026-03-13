@@ -1,0 +1,169 @@
+/* ============================================================
+   STATS.CSS — Community Section (replaces old stats cards)
+   ============================================================ */
+
+/* --- Section Wrapper --- */
+.community-section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Section Header --- */
+.community-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.community-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    margin: 16px 0 14px;
+    line-height: 1.15;
+}
+
+.community-sub {
+    font-size: 16px;
+    color: var(--gray);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* --- 3-column grid, 2 rows → 6 cards --- */
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* --- Base Community Card --- */
+.community-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 30px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.community-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(47, 139, 212, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.community-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(47, 139, 212, 0.35);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Accent (orange) Card Variant --- */
+.community-card-accent {
+    background: linear-gradient(140deg, #2F8BD4 0%, #1a5a96 100%);
+    border-color: transparent;
+}
+
+.community-card-accent::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+}
+
+.community-card-accent:hover {
+    border-color: transparent;
+    box-shadow: 0 20px 48px rgba(47, 139, 212, 0.4);
+}
+
+/* --- Icon --- */
+.community-card-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+/* --- Card Title --- */
+.community-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* --- Card Description --- */
+.community-card-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.65;
+    flex: 1;
+    margin: 0;
+}
+
+.community-card-accent .community-card-title,
+.community-card-accent .community-card-desc {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.community-card-accent .community-card-desc {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Join Community Button (default: subtle outline) --- */
+.btn-community {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--orange);
+    background: rgba(47, 139, 212, 0.1);
+    border: 1px solid rgba(47, 139, 212, 0.3);
+    padding: 9px 20px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-community:hover {
+    background: var(--orange);
+    color: var(--white);
+    border-color: var(--orange);
+}
+
+/* --- Join Community Button (white variant for accent cards) --- */
+.btn-community-white {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-community-white:hover {
+    background: var(--white);
+    color: #2F8BD4;
+    border-color: var(--white);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .community-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .community-section {
+        padding: 60px 20px;
+    }
+
+    .community-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,145 @@
+/* ============================================================
+   FOOTER.CSS — Footer with giant background text
+   ============================================================ */
+
+.footer {
+    background: var(--black);
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+}
+
+/* Giant outlined "Sheryians" text in the background */
+.footer-bg-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(40px, 14vw, 220px);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.07);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+    user-select: none;
+    line-height: 1;
+    /* footer already has overflow:hidden so this is safely clipped */
+}
+
+/* --- Main content row --- */
+.footer-content {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 260px 40px 60px;
+    position: relative;
+    z-index: 1;
+    align-items: flex-start;
+}
+
+/* --- Left: Logo + Social icons --- */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    flex-shrink: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(47, 139, 212, 0.08);
+}
+
+/* --- Right: Link columns --- */
+.footer-links {
+    display: flex;
+    gap: 60px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    margin-bottom: 4px;
+}
+
+.footer-link {
+    font-size: 13px;
+    color: var(--gray);
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--white);
+}
+
+.footer-contact-item {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+.contact-label {
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* --- Bottom copyright bar --- */
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.25);
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .footer {
+        padding-top: 60px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        padding: 120px 24px 48px;
+        gap: 40px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 32px;
+    }
+}

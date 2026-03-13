@@ -1,0 +1,321 @@
+/* ============================================================
+   COURSES.CSS — Courses CTA + Course Cards Section
+   ============================================================ */
+
+/* --- Cream background wrapper --- */
+.courses-cta-section {
+    background: #000;
+    padding: 100px 40px 100px;
+    text-align: center;
+}
+
+.badge-light {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.courses-cta-heading {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 48px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Explore Courses button --- */
+.btn-orange {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    margin-bottom: 64px;
+    box-shadow: 0 8px 32px rgba(47, 139, 212, 0.3);
+}
+
+.btn-orange:hover {
+    background: var(--orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(47, 139, 212, 0.45);
+}
+
+/* --- Course Card Stack --- */
+.course-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.course-card {
+    border-radius: 24px;
+    overflow: hidden;
+    text-align: left;
+}
+
+/* Light (white bg) card */
+.course-card-light {
+    background: var(--white);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Orange card */
+.course-card-orange {
+    background: var(--orange);
+}
+
+.course-card-inner {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+}
+
+/* Image side */
+.course-card-img-wrap {
+    flex: 0 0 380px;
+    overflow: hidden;
+}
+
+.course-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 300px;
+    transition: transform 0.4s ease;
+}
+
+.course-card:hover .course-card-img {
+    transform: scale(1.03);
+}
+
+/* Text side */
+.course-card-info {
+    flex: 1;
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+}
+
+.course-card-info-left {
+    padding: 40px 44px;
+}
+
+.course-card-title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.course-title-white {
+    color: var(--white);
+}
+
+.course-card-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* Tags */
+.course-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.course-meta-tag {
+    background: #f3f3f3;
+    color: #444;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.02em;
+}
+
+.course-meta-tag-white {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+}
+
+/* Price + Enroll Row */
+.course-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.course-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.course-price-white {
+    color: var(--white);
+}
+
+.btn-dark-sm {
+    background: #1a1a1a;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+}
+
+.btn-dark-sm:hover {
+    background: #333;
+}
+
+.btn-white-sm {
+    background: var(--white);
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+}
+
+.btn-white-sm:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* ============================================================
+   COMING SOON BLOCK
+   ============================================================ */
+
+.courses-coming-soon {
+    position: relative;
+    overflow: hidden;
+    max-width: 620px;
+    margin: 0 auto;
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(47, 139, 212, 0.06), 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle grain texture overlay */
+.cs-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* Live badge */
+.cs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+}
+
+.cs-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 0 0 rgba(47, 139, 212, 0.5);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Giant title */
+.cs-title {
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #fff;
+    background: linear-gradient(135deg, #ffffff 30%, rgba(47, 139, 212, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 0.15em;
+    margin: 0;
+}
+
+.cs-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0;
+}
+
+.cs-divider {
+    width: 48px;
+    height: 1px;
+    background: rgba(47, 139, 212, 0.4);
+    border-radius: 2px;
+}
+
+/* Notify CTA */
+.cs-notify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 32px rgba(47, 139, 212, 0.35);
+    text-decoration: none;
+}
+
+.cs-notify-btn:hover {
+    background: var(--orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(47, 139, 212, 0.5);
+}
+
+.cs-footnote {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.03em;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .courses-coming-soon {
+        padding: 36px 22px;
+    }
+}

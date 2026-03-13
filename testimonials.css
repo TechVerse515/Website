@@ -1,0 +1,109 @@
+/* ============================================================
+   TESTIMONIALS.CSS — Student Review Cards Section
+   ============================================================ */
+
+.testimonials-section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--black);
+}
+
+/* --- 3-column grid --- */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+    text-align: left;
+}
+
+/* --- Card --- */
+.testimonial-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Highlighted active card */
+.testimonial-card-active {
+    border-color: rgba(47, 139, 212, 0.4);
+    background: #081828;
+}
+
+/* --- Card Header (avatar + name) --- */
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Colored letter avatar */
+.t-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+/* Photo avatar */
+.t-avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.t-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.t-role {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 2px;
+}
+
+/* --- Stars + Rating --- */
+.t-stars {
+    font-size: 14px;
+    color: #FFD700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.t-rating {
+    color: var(--gray);
+    font-size: 12px;
+    font-family: var(--font);
+}
+
+/* --- Review text --- */
+.t-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+}
