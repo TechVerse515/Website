@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Verse — Partner Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="form.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- BADGE -->
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Early Access · Limited Spots
+  </div>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <h1 class="page-title">Partner With TechVerse</h1>
+    <p class="page-subtitle">Collaborate with our community to hire talented interns, build projects, and grow your startup.</p>
+  </header>
+
+  <!-- FORM CARD -->
+  <div class="form-card" id="formCard">
+
+    <!-- SUCCESS STATE -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-ring">
+        <svg viewBox="0 0 24 24"><polyline points="4,12 9,17 20,6"/></svg>
+      </div>
+      <div class="success-title">Application Submitted! 🎉</div>
+      <div class="success-body">Thank you! Our team will review your application and contact you soon to discuss next steps.</div>
+    </div>
+
+    <!-- FORM -->
+    <form id="pForm" novalidate>
+
+      <!-- SECTION 1 -->
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6c4fd8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Basic Information</div>
+          <div class="section-subtitle">Let's start with who you are</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>First Name</label>
+          <div class="input-wrap">
+            <input type="text" name="firstName" placeholder="Rahul" autocomplete="given-name">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Last Name</label>
+          <div class="input-wrap">
+            <input type="text" name="lastName" placeholder="Sharma" autocomplete="family-name">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <input type="email" name="email" id="emailInput" placeholder="yourname@gmail.com" autocomplete="email" required>
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <span class="field-hint">Please use your Gmail address (e.g. name@gmail.com)</span>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Phone Number</label>
+          <div class="input-wrap phone-wrap">
+            <span class="phone-prefix">🇮🇳 +91</span>
+            <input type="tel" name="phone" id="phoneInput" class="phone-input" placeholder="98765 43210" autocomplete="tel" maxlength="10">
+            <svg class="ico" style="color:#ef4444" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span class="field-hint">10-digit Indian mobile number</span>
+        </div>
+        <div class="field-group">
+          <label>State / UT</label>
+          <div class="sel-wrap">
+            <select name="region">
+              <option value="" disabled selected>Select your state</option>
+              <optgroup label="States">
+                <option>Andhra Pradesh</option>
+                <option>Arunachal Pradesh</option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Chhattisgarh</option>
+                <option>Goa</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Himachal Pradesh</option>
+                <option>Jharkhand</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Madhya Pradesh</option>
+                <option>Maharashtra</option>
+                <option>Manipur</option>
+                <option>Meghalaya</option>
+                <option>Mizoram</option>
+                <option>Nagaland</option>
+                <option>Odisha</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Sikkim</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Tripura</option>
+                <option>Uttar Pradesh</option>
+                <option>Uttarakhand</option>
+                <option>West Bengal</option>
+              </optgroup>
+              <optgroup label="Union Territories">
+                <option>Andaman & Nicobar Islands</option>
+                <option>Chandigarh</option>
+                <option>Dadra & Nagar Haveli and Daman & Diu</option>
+                <option>Delhi (NCT)</option>
+                <option>Jammu & Kashmir</option>
+                <option>Ladakh</option>
+                <option>Lakshadweep</option>
+                <option>Puducherry</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>City</label>
+          <div class="input-wrap">
+            <input type="text" name="city" placeholder="e.g. Bengaluru, Mumbai, Delhi">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="hl">LinkedIn Profile</label>
+          <div class="input-wrap">
+            <input type="url" name="linkedin" placeholder="linkedin.com/in/yourprofile">
+            <svg class="ico" style="color:#6366f1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider"></div>
+
+      <!-- SECTION 2 -->
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6c4fd8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Startup Details</div>
+          <div class="section-subtitle">Tell us about what you're building</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Startup Name</label>
+          <div class="input-wrap">
+            <input type="text" name="startupName" placeholder="e.g. TechSeva Solutions">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Industry / Domain</label>
+          <div class="input-wrap">
+            <input type="text" name="domain" placeholder="e.g. FinTech, SaaS, HealthTech">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Startup Stage</label>
+          <div class="sel-wrap">
+            <select name="stage">
+              <option value="" disabled selected>Select stage</option>
+              <option>Idea Stage</option>
+              <option>Early Stage</option>
+              <option>Growth Stage</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Startup Website / LinkedIn</label>
+          <div class="input-wrap">
+            <input type="url" name="website" placeholder="https://yourstartup.com">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Short Description of Your Startup</label>
+        <textarea name="description" class="plain" placeholder="What does your startup do? What problem are you solving?" rows="4"></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>GST Number <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-light)">(optional)</span></label>
+          <div class="input-wrap">
+            <input type="text" name="gst" placeholder="22AAAAA0000A1Z5" maxlength="15" style="text-transform:uppercase">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Team Size</label>
+          <div class="sel-wrap">
+            <select name="teamSize">
+              <option value="" disabled selected>Select team size</option>
+              <option>Solo Founder</option>
+              <option>2–5 members</option>
+              <option>6–10 members</option>
+              <option>11–25 members</option>
+              <option>26–50 members</option>
+              <option>50+ members</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider"></div>
+
+      <!-- SECTION 3 -->
+      <div class="section-head">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6c4fd8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Collaboration Goals</div>
+          <div class="section-subtitle">How do you want to work with Tech Verse?</div>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-bottom:20px;">
+        <span class="check-title">What type of partnership are you interested in?</span>
+        <div class="check-grid">
+          <label class="check-pill">
+            <input type="checkbox" name="p" value="interns">
+            <span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span class="cb-text">Hiring Interns</span>
+          </label>
+          <label class="check-pill">
+            <input type="checkbox" name="p" value="project">
+            <span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span class="cb-text">Project Collaboration</span>
+          </label>
+          <label class="check-pill">
+            <input type="checkbox" name="p" value="mentorship">
+            <span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span class="cb-text">Mentorship</span>
+          </label>
+          <label class="check-pill">
+            <input type="checkbox" name="p" value="events">
+            <span class="cb-box"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span class="cb-text">Community Events</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Why do you want to partner with Tech Verse?</label>
+        <textarea name="whyPartner" class="plain" placeholder="Tell us what you hope to achieve through this partnership and how we can collaborate..." rows="4"></textarea>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="submitBtn">
+          Apply for Partnership
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<script>
+  // Only allow digits in phone field
+  const phoneInput = document.getElementById('phoneInput');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
+
+  document.getElementById('pForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    // Gmail validation
+    const emailInput = document.getElementById('emailInput');
+    if (emailInput) {
+      const email = emailInput.value.trim().toLowerCase();
+      if (!email.endsWith('@gmail.com')) {
+        emailInput.style.borderColor = '#ef4444';
+        emailInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.12)';
+        emailInput.nextElementSibling && (emailInput.nextElementSibling.style.color = '#ef4444');
+        emailInput.closest('.field-group').querySelector('.field-hint').style.color = '#ef4444';
+        emailInput.closest('.field-group').querySelector('.field-hint').textContent = '⚠ Please use a valid Gmail address (name@gmail.com)';
+        emailInput.addEventListener('input', function() {
+          this.style.borderColor = '';
+          this.style.boxShadow = '';
+          this.closest('.field-group').querySelector('.field-hint').style.color = '';
+          this.closest('.field-group').querySelector('.field-hint').textContent = 'Please use your Gmail address (e.g. name@gmail.com)';
+        }, { once: true });
+        valid = false;
+      }
+    }
+
+    // Phone validation - must be 10 digits
+    if (phoneInput) {
+      const phone = phoneInput.value.replace(/\D/g, '');
+      if (phone.length !== 10) {
+        phoneInput.style.borderColor = '#ef4444';
+        phoneInput.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.12)';
+        phoneInput.closest('.field-group').querySelector('.field-hint').style.color = '#ef4444';
+        phoneInput.closest('.field-group').querySelector('.field-hint').textContent = '⚠ Enter a valid 10-digit mobile number';
+        phoneInput.addEventListener('input', function() {
+          this.style.borderColor = '';
+          this.style.boxShadow = '';
+          this.closest('.field-group').querySelector('.field-hint').style.color = '';
+          this.closest('.field-group').querySelector('.field-hint').textContent = '10-digit Indian mobile number';
+        }, { once: true });
+        valid = false;
+      }
+    }
+
+    if (!valid) return;
+
+    const form = document.getElementById('pForm');
+    form.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    form.style.opacity = '0';
+    form.style.transform = 'translateY(-8px)';
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('successOverlay').classList.add('visible');
+    }, 300);
+  });
+</script>
+</body>
+</html>
