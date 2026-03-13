@@ -3,7 +3,7 @@
    ============================================================ */
 
 .impact-section {
-    padding: 80px 0 120px;
+    padding: 56px 0 80px;
     text-align: center;
     /* Clip horizontally so 3D cards don't cause page-width scroll on mobile */
     overflow: hidden;
@@ -13,9 +13,9 @@
 .slider-scene {
     position: relative;
     width: 100%;
-    height: 580px;
-    margin: 60px auto 0;
-    perspective: 1000px;
+    height: 420px;
+    margin: 40px auto 0;
+    perspective: 1200px;
     perspective-origin: 50% 38%;
     /* isolate 3D stacking context so cards don't escape to document level */
     transform-style: flat;
@@ -39,11 +39,11 @@
     left: 50%;
     top: 50%;
     /* portrait card */
-    width: 220px;
-    height: 320px;
-    margin-left: -110px;
-    margin-top: -160px;
-    border-radius: 14px;
+    width: 180px;
+    height: 255px;
+    margin-left: -90px;
+    margin-top: -127px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     backface-visibility: hidden;
@@ -51,7 +51,7 @@
     transition:
         box-shadow 0.5s ease,
         filter 0.5s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.40);
 }
 
 .slide img {
@@ -189,14 +189,14 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .slider-scene {
-        height: 440px;
+        height: 340px;
     }
 
     .slide {
-        width: 160px;
-        height: 240px;
-        margin-left: -80px;
-        margin-top: -120px;
+        width: 130px;
+        height: 190px;
+        margin-left: -65px;
+        margin-top: -95px;
     }
 
     .slider-btn-prev {
